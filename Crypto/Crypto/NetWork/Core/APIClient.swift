@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-import UIKit
+import SwiftUI
 
 // MARK: - ENUM
 nonisolated enum CachePolicy {
