@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F10864382F324C8F0019E1CC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F10864372F324C8F0019E1CC /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F108641A2F3245A20019E1CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F10864382F324C8F0019E1CC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Crypto;
 			packageProductDependencies = (
+				F10864372F324C8F0019E1CC /* Alamofire */,
 			);
 			productName = Crypto;
 			productReference = F108640C2F3245A10019E1CC /* Crypto.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = F10864032F3245A10019E1CC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F10864362F324C8F0019E1CC /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F108640D2F3245A10019E1CC /* Products */;
 			projectDirPath = "";
@@ -572,6 +581,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F10864362F324C8F0019E1CC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.11.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F10864372F324C8F0019E1CC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F10864362F324C8F0019E1CC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F10864042F3245A10019E1CC /* Project object */;
 }
