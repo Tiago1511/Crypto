@@ -9,12 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        VStack {
+        ZStack {
             Color.background
                 .ignoresSafeArea(.all)
-        }.background(){
-            Color.background
-                .ignoresSafeArea(.all)
+            Text("Home")
         }
             
         
