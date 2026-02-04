@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		F10864382F324C8F0019E1CC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F10864372F324C8F0019E1CC /* Alamofire */; };
+		F1AF91672F334F8500D4383D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F1AF91662F334F8500D4383D /* Localizable.xcstrings */; };
+		F1AF91682F334F8500D4383D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F1AF91662F334F8500D4383D /* Localizable.xcstrings */; };
+		F1AF91692F334F8500D4383D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F1AF91662F334F8500D4383D /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,11 +34,37 @@
 		F108640C2F3245A10019E1CC /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10864192F3245A20019E1CC /* CryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10864232F3245A20019E1CC /* CryptoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AF91662F334F8500D4383D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F1AF91712F33500400D4383D /* Exceptions for "Crypto" folder in "CryptoTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/HomeView.swift,
+				Views/WalletAddView.swift,
+				Views/WalletListView.swift,
+			);
+			target = F10864182F3245A20019E1CC /* CryptoTests */;
+		};
+		F1AF91722F33500400D4383D /* Exceptions for "Crypto" folder in "CryptoUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/HomeView.swift,
+				Views/WalletAddView.swift,
+				Views/WalletListView.swift,
+			);
+			target = F10864222F3245A20019E1CC /* CryptoUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F108640E2F3245A10019E1CC /* Crypto */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F1AF91712F33500400D4383D /* Exceptions for "Crypto" folder in "CryptoTests" target */,
+				F1AF91722F33500400D4383D /* Exceptions for "Crypto" folder in "CryptoUITests" target */,
+			);
 			path = Crypto;
 			sourceTree = "<group>";
 		};
@@ -80,6 +109,7 @@
 		F10864032F3245A10019E1CC = {
 			isa = PBXGroup;
 			children = (
+				F1AF91662F334F8500D4383D /* Localizable.xcstrings */,
 				F108640E2F3245A10019E1CC /* Crypto */,
 				F108641C2F3245A20019E1CC /* CryptoTests */,
 				F10864262F3245A20019E1CC /* CryptoUITests */,
@@ -198,6 +228,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-PT",
 			);
 			mainGroup = F10864032F3245A10019E1CC;
 			minimizedProjectReferenceProxies = 1;
@@ -221,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1AF91672F334F8500D4383D /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1AF91682F334F8500D4383D /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1AF91692F334F8500D4383D /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +371,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -393,6 +428,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
