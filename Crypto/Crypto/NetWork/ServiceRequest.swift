@@ -1,6 +1,6 @@
 //
 //  ServiceRequest.swift
-//  arteScope
+//  Crypto
 //
 //  Created by tiago on 01/01/2026.
 //
@@ -11,15 +11,10 @@ import UIKit
 
 final class ServiceRequest {
     
-    // MARK: - Singleton
-    static let shared = ServiceRequest()
+    private let apiClient: APIClientProtocol
     
-    private var header: HTTPHeaders
-    
-    private var apiClient: APIClient = .shared
-    
-    init() {
-        self.header = HTTPHeaders()
+    init(apiClient: APIClientProtocol) {
+        self.apiClient = apiClient
     }
         
 }

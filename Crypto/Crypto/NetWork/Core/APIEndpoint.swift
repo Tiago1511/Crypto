@@ -1,6 +1,6 @@
 //
 //  APIEndpoint.swift
-//  arteScope
+//  Crypto
 //
 //  Created by tiago on 01/01/2026.
 //
