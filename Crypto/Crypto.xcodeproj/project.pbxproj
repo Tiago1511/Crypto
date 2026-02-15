@@ -44,11 +44,14 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
-				CriptoService.swift,
 				Extencions/AmountExtencion.swift,
 				Model/CoinModel.swift,
 				NetWork/Core/APIClientProtocol.swift,
+				NetWork/Service/CriptoService.swift,
+				ViewModel/CoinDetailViewModel.swift,
 				ViewModel/CriptoViewModel.swift,
+				ViewModel/HomeViewModel.swift,
+				Views/CoinDetailView.swift,
 				Views/HomeView.swift,
 				Views/TableViews/CoinCellView.swift,
 				Views/WalletAddView.swift,
@@ -60,11 +63,14 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
-				CriptoService.swift,
 				Extencions/AmountExtencion.swift,
 				Model/CoinModel.swift,
 				NetWork/Core/APIClientProtocol.swift,
+				NetWork/Service/CriptoService.swift,
+				ViewModel/CoinDetailViewModel.swift,
 				ViewModel/CriptoViewModel.swift,
+				ViewModel/HomeViewModel.swift,
+				Views/CoinDetailView.swift,
 				Views/HomeView.swift,
 				Views/TableViews/CoinCellView.swift,
 				Views/WalletAddView.swift,

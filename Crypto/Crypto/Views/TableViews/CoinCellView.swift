@@ -9,14 +9,13 @@ import SwiftUI
 
 struct CoinCellView: View {
     
-    var coin: CoinModel
-    @ObservedObject var viewModel: CoinViewModel
+    @StateObject var viewModel: CoinViewModel
     
     var body: some View {
         
         HStack(spacing: 5) {
             
-            Text("#\(String(describing: coin.marketCapRank ?? 00))")
+            Text("#\(String(describing: viewModel.coin.marketCapRank ?? 00))")
                 .font(.title3)
                 .fontWeight(.semibold)
             
@@ -25,17 +24,20 @@ struct CoinCellView: View {
                     .resizable()
                     .frame(width: 50, height: 50)
                     .clipShape(Circle())
-            } else {
+            } else if viewModel.isLoading {
                 ProgressView()
                     .frame(width: 50, height: 50)
+            } else {
+                Image(systemName: "questionmark")
+                    .foregroundStyle(.accent)
             }
             
             
             VStack(alignment: .leading) {
-                Text(coin.name)
+                Text(viewModel.coin.name)
                     .font(.title)
                     .fontWeight(.regular)
-                Text(coin.symbol)
+                Text(viewModel.coin.symbol)
                     .font(.title3)
                     .fontWeight(.regular)
             }
@@ -44,36 +46,28 @@ struct CoinCellView: View {
             Spacer()
             
             VStack() {
-                Text("\(coin.currentPrice.toAmountString)")
+                Text("\(viewModel.coin.currentPrice.toAmountString)")
+                    .font(.title3)
+                    .fontWeight(.regular)
+                
+                Text("\(viewModel.coin.priceChangePercentage24H?.toPercentageString ?? "0.0%")")
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .foregroundStyle(coin.currentPrice >= 0 ? .green : .red)
-                
-                
-                Text("\(coin.priceChangePercentage24H?.toPercentageString ?? "0.0%")")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(coin.currentPrice >= 0 ? .green : .red)
+                    .foregroundStyle(viewModel.coin.currentPrice >= 0 ? .green : .red)
             }
             .padding(.trailing, 10)
             
         }
-        
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            Color.backgroundCl
-                .ignoresSafeArea(.all)
-        )
-        .onAppear {
-            Task {
+        .task {
                 await viewModel.loadIcon()
-            }
         }
     }
 }
 
 #Preview {
     CoinCellView(
-        coin: CoinModelMock.coin,
-        viewModel: CoinViewModel(coin: CoinModelMock.coin, coinService: CriptoService(APIClient.shared)))
+        viewModel: CoinViewModel(
+            coin: CoinModelMock.coin,
+            coinService: CriptoService(APIClient.shared)
+        ))
 }

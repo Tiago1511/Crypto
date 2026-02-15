@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CoinModel: Decodable {
+struct CoinModel: Identifiable, Decodable {
     let id: String
     let symbol: String
     let name: String

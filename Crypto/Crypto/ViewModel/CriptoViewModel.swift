@@ -14,6 +14,7 @@ class CoinViewModel: ObservableObject {
     
     @Published var coin: CoinModel
     @Published var icon: UIImage? = nil
+    @Published var isLoading: Bool = false
     
     private let coinService: CriptoService
     
@@ -23,10 +24,14 @@ class CoinViewModel: ObservableObject {
     }
     
     func loadIcon() async {
+        guard icon == nil else { return }
+        isLoading = true
         do {
             icon = try await coinService.getImage(coin.image)
+            isLoading = true
         } catch {
             print(error)
         }
+        isLoading = false
     }
 }
