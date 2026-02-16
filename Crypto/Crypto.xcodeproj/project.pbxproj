@@ -11,6 +11,8 @@
 		F1AF91672F334F8500D4383D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F1AF91662F334F8500D4383D /* Localizable.xcstrings */; };
 		F1AF91682F334F8500D4383D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F1AF91662F334F8500D4383D /* Localizable.xcstrings */; };
 		F1AF91692F334F8500D4383D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F1AF91662F334F8500D4383D /* Localizable.xcstrings */; };
+		F1D2B3862F3754E500835419 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F1D2B3852F3754E500835419 /* Alamofire */; };
+		F1D2B3882F3754EA00835419 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F1D2B3872F3754EA00835419 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +43,17 @@
 		F1AF91712F33500400D4383D /* Exceptions for "Crypto" folder in "CryptoTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
+				Extencions/AmountExtencion.swift,
+				Model/CoinModel.swift,
+				NetWork/Core/APIClientProtocol.swift,
+				NetWork/Service/CriptoService.swift,
+				ViewModel/CoinDetailViewModel.swift,
+				ViewModel/CriptoViewModel.swift,
+				ViewModel/HomeViewModel.swift,
+				Views/CoinDetailView.swift,
 				Views/HomeView.swift,
+				Views/TableViews/CoinCellView.swift,
 				Views/WalletAddView.swift,
 				Views/WalletListView.swift,
 			);
@@ -50,7 +62,17 @@
 		F1AF91722F33500400D4383D /* Exceptions for "Crypto" folder in "CryptoUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
+				Extencions/AmountExtencion.swift,
+				Model/CoinModel.swift,
+				NetWork/Core/APIClientProtocol.swift,
+				NetWork/Service/CriptoService.swift,
+				ViewModel/CoinDetailViewModel.swift,
+				ViewModel/CriptoViewModel.swift,
+				ViewModel/HomeViewModel.swift,
+				Views/CoinDetailView.swift,
 				Views/HomeView.swift,
+				Views/TableViews/CoinCellView.swift,
 				Views/WalletAddView.swift,
 				Views/WalletListView.swift,
 			);
@@ -93,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1D2B3862F3754E500835419 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1D2B3882F3754EA00835419 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +137,7 @@
 				F108640E2F3245A10019E1CC /* Crypto */,
 				F108641C2F3245A20019E1CC /* CryptoTests */,
 				F10864262F3245A20019E1CC /* CryptoUITests */,
+				F1D2B3842F3754E500835419 /* Frameworks */,
 				F108640D2F3245A10019E1CC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,6 +150,13 @@
 				F10864232F3245A20019E1CC /* CryptoUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F1D2B3842F3754E500835419 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +203,7 @@
 			);
 			name = CryptoTests;
 			packageProductDependencies = (
+				F1D2B3852F3754E500835419 /* Alamofire */,
 			);
 			productName = CryptoTests;
 			productReference = F10864192F3245A20019E1CC /* CryptoTests.xctest */;
@@ -194,6 +227,7 @@
 			);
 			name = CryptoUITests;
 			packageProductDependencies = (
+				F1D2B3872F3754EA00835419 /* Alamofire */,
 			);
 			productName = CryptoUITests;
 			productReference = F10864232F3245A20019E1CC /* CryptoUITests.xctest */;
@@ -631,6 +665,16 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		F10864372F324C8F0019E1CC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F10864362F324C8F0019E1CC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F1D2B3852F3754E500835419 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F10864362F324C8F0019E1CC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F1D2B3872F3754EA00835419 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F10864362F324C8F0019E1CC /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;

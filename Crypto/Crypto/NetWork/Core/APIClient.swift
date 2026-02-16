@@ -1,6 +1,6 @@
 //
 //  APIClient.swift
-//  arteScope
+//  Crypto
 //
 //  Created by tiago on 01/01/2026.
 //
@@ -25,7 +25,7 @@ nonisolated enum NetworkError: Error {
 }
 
 @MainActor
-final class APIClient {
+final class APIClient: APIClientProtocol {
     
     // MARK: - Singleton
     static let shared = APIClient()

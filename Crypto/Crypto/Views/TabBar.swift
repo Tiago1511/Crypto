@@ -13,7 +13,7 @@ struct TabBar: View {
         
         TabView() {
            
-            HomeView()
+            HomeView(viewModel: HomeViewModel( CriptoService(APIClient.shared)))
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
