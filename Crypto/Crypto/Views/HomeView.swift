@@ -16,9 +16,11 @@ struct HomeView: View {
             VStack {
                 List(viewModel.filteredCoins, id: \.id){ coin in
                     NavigationLink(
-                        destination: CoinDetailView(),
+                        destination: CoinDetailView(
+                            viewModel: viewModel.createCoinDetailViewModel(coin)),
                         label: {
-                            CoinCellView(viewModel: viewModel.createCoinViewModel(coin))
+                            CoinCellView(
+                                viewModel: viewModel.createCoinViewModel(coin))
                         })
                 }
                 .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "SearchCoins")

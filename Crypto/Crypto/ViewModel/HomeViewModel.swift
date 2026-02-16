@@ -37,7 +37,7 @@ class HomeViewModel: ObservableObject {
         CoinViewModel(coin: coin, coinService: CriptoService(APIClient.shared))
     }
     
-    func createCoinDetailViewModel(for coin: CoinModel) -> CoinDetailViewModel {
+    func createCoinDetailViewModel(_ coin: CoinModel) -> CoinDetailViewModel {
         CoinDetailViewModel(coin: coin, coinService: CriptoService(APIClient.shared))
     }
     
