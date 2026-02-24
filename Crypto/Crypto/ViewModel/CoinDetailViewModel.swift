@@ -9,21 +9,27 @@ import Foundation
 import Combine
 import SwiftUI
 
+@MainActor
 class CoinDetailViewModel: ObservableObject {
     
     @Published var coin: CoinModel
     @Published var coinImage: UIImage?
     @Published var details: [DetailCoinModel] = []
     @Published var isLoading: Bool = false
+    @Published var isLoadingChart: Bool = false
+    @Published var chartData: [ChartDataPoint] = []
+    private var historicalData: HistoricalChartModel?
     
-    private let coinService: CriptoService
+    private let coinService: CoinDetailsService
     
-    init(coin: CoinModel, coinService: CriptoService) {
+    //MARK: - Init
+    init(coin: CoinModel, coinService: CoinDetailsService) {
         self.coin = coin
         self.coinService = coinService
         cretateArrayForm()
     }
     
+    //MARK: - Service
     func fetchImage() async {
         isLoading = true
         defer{
@@ -37,6 +43,21 @@ class CoinDetailViewModel: ObservableObject {
         
     }
     
+    func fetchChartData() async {
+        isLoadingChart = true
+        defer{
+            isLoadingChart = false
+        }
+        do {
+           // historicalData = try await coinService.getHistoric(forCoinId: coin.id)
+            historicalData = HistoricalChartModelMock.chartData
+            createChartData()
+        } catch {
+            print("Error fetching chart data: \(error)")
+        }
+    }
+    
+    //MARK: - Prepare Data
     private func cretateArrayForm(){
         //first
         details.append(DetailCoinModel(
@@ -83,5 +104,15 @@ class CoinDetailViewModel: ObservableObject {
                     value: coin.maxSupply?.toAmountString ?? "0.0")
             ]
         ))
+    }
+    
+    private func createChartData() {
+        chartData = historicalData?.price.map {
+            ChartDataPoint(
+                date: Date(timeIntervalSince1970: $0[0] / 1000),
+                value: $0[1]
+            )
+        } ?? []
+        
     }
 }

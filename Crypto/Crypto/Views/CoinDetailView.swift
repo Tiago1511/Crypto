@@ -6,28 +6,28 @@
 //
 
 import SwiftUI
+import Charts
 
 struct CoinDetailView: View {
     
     @ObservedObject var viewModel: CoinDetailViewModel
     
     var body: some View {
-        NavigationStack{
-            
-            VStack(alignment: .leading){
-                headerSection.padding(.leading, 30)
-                detailsSection
-            }
-            .background(
-                Color.backgroundCl
-            )
-            .task {
-                await viewModel.fetchImage()
-            }
-            
-            
-        }.navigationTitle(viewModel.coin.name)
-            .navigationBarTitleDisplayMode(.inline)
+        
+        VStack(alignment: .leading){
+            headerSection.padding(.leading, 30)
+            detailsSection
+        }
+        .background(
+            Color.backgroundCl
+        )
+        .task {
+            await viewModel.fetchImage()
+            await viewModel.fetchChartData()
+        }
+        
+        .navigationTitle(viewModel.coin.name)
+        .navigationBarTitleDisplayMode(.inline)
         
     }
 
@@ -80,17 +80,27 @@ struct CoinDetailView: View {
 
 
     private var detailsSection: some View {
-        List(viewModel.details, id: \.self) { detail in
+        List {
             Section {
-                ForEach(detail.data, id: \.self) { data in
-                    HStack {
-                        Text(data.title)
-                        Spacer()
-                        Text(data.value)
+                Chart(viewModel.chartData) { item in
+                    LineMark(
+                        x: .value("Data", item.date),
+                        y: .value("Preço", item.value)
+                    )
+                }
+                .frame(height: 250)
+            }
+
+            ForEach(viewModel.details, id: \.self) { detail in
+                Section(header: Text(detail.title ?? "")) {
+                    ForEach(detail.data, id: \.self) { data in
+                        HStack {
+                            Text(data.title)
+                            Spacer()
+                            Text(data.value)
+                        }
                     }
                 }
-            } header: {
-                Text(detail.title ?? "")
             }
         }
     }
@@ -101,6 +111,6 @@ struct CoinDetailView: View {
     CoinDetailView(
         viewModel: CoinDetailViewModel(
             coin: CoinModelMock.coin,
-            coinService: CriptoService(APIClient.shared)
+            coinService: CoinDetailsService(APIClient.shared)
         ))
 }
