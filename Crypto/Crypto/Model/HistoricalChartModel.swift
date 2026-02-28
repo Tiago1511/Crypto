@@ -19,6 +19,20 @@ struct HistoricalChartModel: Codable {
     }
 }
 
+struct ChartDataModel {
+    var dataPoints: [ChartDataPoint]
+    var firstData: Date {
+        get {
+            dataPoints.first?.date ?? Date()
+        }
+    }
+    var lastData: Date {
+        get {
+            dataPoints.last?.date ?? Date()
+        }
+    }
+}
+
 struct ChartDataPoint: Identifiable {
     let id = UUID()
     let date: Date

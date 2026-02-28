@@ -17,7 +17,8 @@ class CoinDetailViewModel: ObservableObject {
     @Published var details: [DetailCoinModel] = []
     @Published var isLoading: Bool = false
     @Published var isLoadingChart: Bool = false
-    @Published var chartData: [ChartDataPoint] = []
+    @Published var chartData: ChartDataModel?
+    @Published var isValidDate : Bool = true
     private var historicalData: HistoricalChartModel?
     
     private let coinService: CoinDetailsService
@@ -32,12 +33,11 @@ class CoinDetailViewModel: ObservableObject {
     //MARK: - Service
     func fetchImage() async {
         isLoading = true
-        defer{
-            isLoading = false
-        }
         do {
             coinImage = try await coinService.getImage(coin.image)
+            isLoading = false
         } catch {
+            isLoading = false
             print("Error fetching image: \(error)")
         }
         
@@ -45,14 +45,13 @@ class CoinDetailViewModel: ObservableObject {
     
     func fetchChartData() async {
         isLoadingChart = true
-        defer{
-            isLoadingChart = false
-        }
         do {
-           // historicalData = try await coinService.getHistoric(forCoinId: coin.id)
+            // historicalData = try await coinService.getHistoric(forCoinId: coin.id)
             historicalData = HistoricalChartModelMock.chartData
             createChartData()
+            isLoadingChart = false
         } catch {
+            isLoadingChart = false
             print("Error fetching chart data: \(error)")
         }
     }
@@ -107,12 +106,23 @@ class CoinDetailViewModel: ObservableObject {
     }
     
     private func createChartData() {
-        chartData = historicalData?.price.map {
-            ChartDataPoint(
-                date: Date(timeIntervalSince1970: $0[0] / 1000),
-                value: $0[1]
-            )
-        } ?? []
         
+        chartData = ChartDataModel(
+            dataPoints: historicalData?.price.map {
+                ChartDataPoint(
+                    date: Date(timeIntervalSince1970: $0[0] / 1000),
+                    value: $0[1]
+                )
+            } ?? []
+        )
+        
+    }
+    
+    func validateDays (_ days: Int) {
+        if days < 1 || days > 365 {
+            isValidDate = false
+        } else {
+            isValidDate = true
+        }
     }
 }

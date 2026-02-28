@@ -11,6 +11,7 @@ import Charts
 struct CoinDetailView: View {
     
     @ObservedObject var viewModel: CoinDetailViewModel
+    @State private var days: Double = 1
     
     var body: some View {
         
@@ -25,12 +26,15 @@ struct CoinDetailView: View {
             await viewModel.fetchImage()
             await viewModel.fetchChartData()
         }
+        .onTapGesture {
+            endTextEditing()
+        }
         
         .navigationTitle(viewModel.coin.name)
         .navigationBarTitleDisplayMode(.inline)
         
     }
-
+    
     private var headerSection: some View {
         VStack (alignment: .leading) {
             HStack {
@@ -44,8 +48,6 @@ struct CoinDetailView: View {
                     Text(viewModel.coin.symbol.uppercased())
                         .font(.title3)
                 }
-                
-                
             }
             
             HStack(spacing: 20) {
@@ -60,7 +62,7 @@ struct CoinDetailView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private var coinImageView: some View {
         if let uiImage = viewModel.coinImage {
@@ -77,34 +79,86 @@ struct CoinDetailView: View {
                 .foregroundStyle(.accent)
         }
     }
-
-
+    
     private var detailsSection: some View {
         List {
             Section {
-                Chart(viewModel.chartData) { item in
-                    LineMark(
-                        x: .value("Data", item.date),
-                        y: .value("Preço", item.value)
-                    )
-                }
-                .frame(height: 250)
+                chartSection
             }
-
+            
             ForEach(viewModel.details, id: \.self) { detail in
                 Section(header: Text(detail.title ?? "")) {
                     ForEach(detail.data, id: \.self) { data in
-                        HStack {
-                            Text(data.title)
-                            Spacer()
-                            Text(data.value)
-                        }
+                        DetailCoinCellView(detailCoin: data)
                     }
                 }
             }
         }
     }
-
+    
+    @ViewBuilder
+    private var chartSection: some View {
+        
+        if let chartData = viewModel.chartData, !chartData.dataPoints.isEmpty {
+            
+            VStack {
+                Slider(value: $days, in: 1...400, step: 1)
+                HStack {
+                    Text(days<=1 ? NSLocalizedString("Day", comment: "") : NSLocalizedString("Days", comment: ""))
+                    
+                    CustomTextField(
+                        title: NSLocalizedString("Days", comment: ""),
+                        text: Binding(
+                            get: {
+                                String(Int(days))
+                            },
+                            set: { newValue in
+                                if let value = Double(newValue) {
+                                    days = min(max(value, 1), 400)
+                                }
+                                viewModel.validateDays(Int(days))
+                            }
+                        ),
+                        isSecure: .constant(false),
+                        keyboardType: .numberPad,
+                        errorMessage: NSLocalizedString("InvalidDays", comment: ""),
+                        isValid: Binding( projectedValue: $viewModel.isValidDate)
+                    )
+                    
+                }
+                
+            }.padding(4)
+            
+            
+            Chart(chartData.dataPoints) { item in
+                LineMark(
+                    x: .value("Data", item.date),
+                    y: .value("Price", item.value)
+                )
+            }
+            .chartXScale(
+                domain: chartData.firstData...chartData.lastData
+            )
+            .frame(height: 250)
+            
+        } else if viewModel.isLoading {
+            ProgressView()
+                .frame(width: 50, height: 50)
+        } else {
+            ContentUnavailableView {
+                Label("Empty Data", systemImage: "text.page.slash.fill")
+            } description: {
+                Text("Unable to load prices")
+            } actions: {
+                Button("Tray Again") {
+                    Task { await viewModel.fetchChartData() }
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .frame(height: 250)
+        }
+    }
+    
 }
 
 #Preview {
