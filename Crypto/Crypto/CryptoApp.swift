@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CryptoApp: App {
@@ -13,5 +14,10 @@ struct CryptoApp: App {
         WindowGroup {
             TabBar()
         }
+        .modelContainer(for: CoinSwiftData.self)
+    }
+    
+    init () {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
     }
 }
