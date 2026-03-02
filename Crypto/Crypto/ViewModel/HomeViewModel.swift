@@ -10,7 +10,7 @@ import Combine
 
 class HomeViewModel: ObservableObject {
     
-    @Published var coins: [CoinModel] = [CoinModelMock.coin, CoinModelMock.coin, CoinModelMock.coin]
+    @Published var coins: [CoinModel] = [CoinModelMock.coin]
     @Published var searchText = ""
     
     private let coinService: CriptoService
@@ -37,8 +37,8 @@ class HomeViewModel: ObservableObject {
         CoinViewModel(coin: coin, coinService: CriptoService(APIClient.shared))
     }
     
-    func createCoinDetailViewModel(for coin: CoinModel) -> CoinDetailViewModel {
-        CoinDetailViewModel(coin: coin, coinService: CriptoService(APIClient.shared))
+    func createCoinDetailViewModel(_ coin: CoinModel) -> CoinDetailViewModel {
+        CoinDetailViewModel(coin: coin, coinService: CoinDetailsService(APIClient.shared))
     }
     
     //MARK: - Services

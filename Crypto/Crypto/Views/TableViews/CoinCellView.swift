@@ -37,7 +37,7 @@ struct CoinCellView: View {
                 Text(viewModel.coin.name)
                     .font(.title)
                     .fontWeight(.regular)
-                Text(viewModel.coin.symbol)
+                Text(viewModel.coin.symbol.uppercased())
                     .font(.title3)
                     .fontWeight(.regular)
             }
@@ -53,7 +53,7 @@ struct CoinCellView: View {
                 Text("\(viewModel.coin.priceChangePercentage24H?.toPercentageString ?? "0.0%")")
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .foregroundStyle(viewModel.coin.currentPrice >= 0 ? .green : .red)
+                    .foregroundStyle(viewModel.coin.priceChangePercentage24H ?? 0.0 >= 0 ? .green : .red)
             }
             .padding(.trailing, 10)
             

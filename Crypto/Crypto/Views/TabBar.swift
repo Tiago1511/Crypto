@@ -15,7 +15,7 @@ struct TabBar: View {
            
             HomeView(viewModel: HomeViewModel( CriptoService(APIClient.shared)))
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Label("Market", systemImage: "house")
                 }
             
             WalletListView()

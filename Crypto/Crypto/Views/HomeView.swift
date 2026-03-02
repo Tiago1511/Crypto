@@ -12,25 +12,26 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     
     var body: some View {
-        NavigationStack(){
-            VStack {
-                List(viewModel.filteredCoins, id: \.id){ coin in
-                    NavigationLink(
-                        destination: CoinDetailView(),
-                        label: {
-                            CoinCellView(viewModel: viewModel.createCoinViewModel(coin))
-                        })
+        NavigationStack {
+            List(viewModel.filteredCoins, id: \.id) { coin in
+                NavigationLink(value: coin) {
+                    CoinCellView(
+                        viewModel: viewModel.createCoinViewModel(coin)
+                    )
                 }
-                .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer, prompt: "SearchCoins")
-                
-                
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(
-                Color.backgroundCl
-                    .ignoresSafeArea(.all)
-            )
+            .searchable(text: $viewModel.searchText,
+                        placement: .navigationBarDrawer,
+                        prompt: "SearchCoins")
             .navigationTitle("Coins")
+            .navigationDestination(for: CoinModel.self) { coin in
+                CoinDetailView(
+                    viewModel: viewModel.createCoinDetailViewModel(coin)
+                )
+            }.background(
+                Color.backgroundCl
+                .ignoresSafeArea(.all)
+                )
             .task {
                 await viewModel.fetchCoins()
             }
