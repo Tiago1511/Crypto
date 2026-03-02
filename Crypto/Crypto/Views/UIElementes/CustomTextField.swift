@@ -18,20 +18,21 @@ struct CustomTextField: View {
     @Binding var isValid: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 5) {
             
             Group {
                 if isSecure {
                     SecureField(title, text: $text)
+                        .padding(5)
                         
                 } else {
                     TextField(title, text: $text)
-                        
+                        .padding(5)
                 }
             }
             .keyboardType(keyboardType)
             .background(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(borderColor, lineWidth: 1)
             )
             

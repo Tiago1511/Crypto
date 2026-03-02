@@ -12,6 +12,8 @@ struct CoinDetailView: View {
     
     @ObservedObject var viewModel: CoinDetailViewModel
     @State private var days: Double = 1
+    private let minDays: Double = 1
+    private let maxDays: Double = 365
     
     var body: some View {
         
@@ -93,7 +95,7 @@ struct CoinDetailView: View {
                     }
                 }
             }
-        }
+        }.scrollDismissesKeyboard(.immediately)
     }
     
     @ViewBuilder
@@ -101,32 +103,12 @@ struct CoinDetailView: View {
         
         if let chartData = viewModel.chartData, !chartData.dataPoints.isEmpty {
             
-            VStack {
-                Slider(value: $days, in: 1...400, step: 1)
-                HStack {
+            VStack(alignment: .leading) {
+                Slider(value: $days, in: minDays...maxDays, step: 1)
+                HStack(spacing:0){
                     Text(days<=1 ? NSLocalizedString("Day", comment: "") : NSLocalizedString("Days", comment: ""))
-                    
-                    CustomTextField(
-                        title: NSLocalizedString("Days", comment: ""),
-                        text: Binding(
-                            get: {
-                                String(Int(days))
-                            },
-                            set: { newValue in
-                                if let value = Double(newValue) {
-                                    days = min(max(value, 1), 400)
-                                }
-                                viewModel.validateDays(Int(days))
-                            }
-                        ),
-                        isSecure: .constant(false),
-                        keyboardType: .numberPad,
-                        errorMessage: NSLocalizedString("InvalidDays", comment: ""),
-                        isValid: Binding( projectedValue: $viewModel.isValidDate)
-                    )
-                    
+                    Text(": \(Int(days))")
                 }
-                
             }.padding(4)
             
             
