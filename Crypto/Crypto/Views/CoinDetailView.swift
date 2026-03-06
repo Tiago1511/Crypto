@@ -40,7 +40,7 @@ struct CoinDetailView: View {
     private var headerSection: some View {
         VStack (alignment: .leading) {
             HStack {
-                coinImageView
+                CoinImageView(image: viewModel.coinImage, isLoading: viewModel.isLoading, size: 50)
                 
                 VStack(alignment: .leading) {
                     Text(viewModel.coin.name)
@@ -62,23 +62,6 @@ struct CoinDetailView: View {
                         viewModel.coin.priceChangePercentage24H ?? 0 >= 0 ? .green : .red
                     )
             }
-        }
-    }
-    
-    @ViewBuilder
-    private var coinImageView: some View {
-        if let uiImage = viewModel.coinImage {
-            Image(uiImage: uiImage)
-                .resizable()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-        } else if viewModel.isLoading {
-            ProgressView()
-                .frame(width: 50, height: 50)
-        } else {
-            Image(systemName: "questionmark")
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.accent)
         }
     }
     

@@ -19,19 +19,7 @@ struct CoinCellView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
             
-            if let uiImage = viewModel.icon {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-            } else if viewModel.isLoading {
-                ProgressView()
-                    .frame(width: 50, height: 50)
-            } else {
-                Image(systemName: "questionmark")
-                    .foregroundStyle(.accent)
-            }
-            
+            CoinImageView(image: viewModel.icon, isLoading: viewModel.isLoading, size: 50)
             
             VStack(alignment: .leading) {
                 Text(viewModel.coin.name)
