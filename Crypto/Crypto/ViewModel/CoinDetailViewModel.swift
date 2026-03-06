@@ -118,6 +118,7 @@ class CoinDetailViewModel: ObservableObject {
         
     }
     
+    //MARK: - Validate
     func validateDays (_ days: Int) {
         if days < 1 || days > 365 {
             isValidDate = false

@@ -28,9 +28,6 @@ struct CoinDetailView: View {
             await viewModel.fetchImage()
             await viewModel.fetchChartData()
         }
-        .onTapGesture {
-            endTextEditing()
-        }
         
         .navigationTitle(viewModel.coin.name)
         .navigationBarTitleDisplayMode(.inline)

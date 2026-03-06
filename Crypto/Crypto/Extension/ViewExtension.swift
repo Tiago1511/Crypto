@@ -1,15 +1,17 @@
 //
-//  ViewExtension.swift
+//  ViewExtensio.swift
 //  Crypto
 //
-//  Created by tiago on 26/02/2026.
+//  Created by tiago on 06/03/2026.
 //
 
 import Foundation
 import SwiftUI
 
 extension View {
-    func endTextEditing() {
-        UIApplication.shared.endEditing()
+    
+    /// Close KeyBoard
+    func dismissKeyboardOnTap() -> some View {
+        modifier(DismissKeyboardOnTap())
     }
 }
