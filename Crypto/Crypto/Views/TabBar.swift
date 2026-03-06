@@ -18,7 +18,7 @@ struct TabBar: View {
                     Label("Market", systemImage: "house")
                 }
             
-            WalletListView()
+            WalletListView(viewModel: WalletViewModel())
                 .tabItem {
                     Label("Wallet", systemImage: "wallet.bifold.fill")
                 }
