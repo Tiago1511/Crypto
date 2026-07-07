@@ -8,12 +8,18 @@
 import Foundation
 import Combine
 import SwiftUI
+import SwiftData
 
 @MainActor
 class AddWalletViewModel: ObservableObject {
     
     let coin: CoinModel
-    let coinImage: UIImage?
+    @Published var isLoading: Bool = false
+    @Published var coinImage: UIImage?
+    @Published var alertItem: AlertItem?
+    
+    private let repository: WalletRepositoryProtocol
+    private let coinService: CriptoService
     
     @Published var quantityString: String = "" {
         didSet {
@@ -30,11 +36,12 @@ class AddWalletViewModel: ObservableObject {
     }
     
     //MARK: - Init
-    init(coin: CoinModel, coinImage: UIImage?, quantity: Double = 0.0) {
+    init(coin: CoinModel, coinService: CriptoService, quantity: Double = 0.0, repository: WalletRepositoryProtocol) {
         self.coin = coin
-        self.coinImage = coinImage
+        self.coinService = coinService
         self.quantityString = quantity == 0.0 ? "" : String(quantity)
         isValidQuantity = true
+        self.repository = repository
     }
     
     //MARK: - Validate
@@ -43,8 +50,39 @@ class AddWalletViewModel: ObservableObject {
     }
     
     //MARK: - Add Wallet
-    
-    func addWallet() {
+    func addWallet(modelContext: ModelContext) {
+        if validateQuantity() {
+            do {
+                try repository.save(coinID: coin.id, name:coin.name, quantity: quantity)
+            } catch {
+                switch error as? RepositoryError {
+                    
+                case .dataAlreadyExists:
+                    alertItem = AlertContent.coinAlreadyExist
+                    
+
+                case .invalidData:
+                    
+                    
+                default:
+                    print("erro: \(error.localizedDescription)")
+                }
+            }
+        }
         
     }
+    
+    //MARK: - Services
+    func loadIcon() async {
+        guard coinImage == nil else { return }
+        isLoading = true
+        do {
+            coinImage = try await coinService.getImage(coin.image)
+            isLoading = true
+        } catch {
+            print(error)
+        }
+        isLoading = false
+    }
+    
 }

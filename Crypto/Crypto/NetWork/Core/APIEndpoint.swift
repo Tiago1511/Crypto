@@ -10,6 +10,6 @@ import Alamofire
 enum  APIEndpoint {
     
     // MARK: - Base URL
-    static let baseURL = ""
+    static let baseURL = "https://api.coingecko.com/api/v3/coins/list"
     
 }

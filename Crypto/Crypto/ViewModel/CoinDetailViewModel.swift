@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import SwiftData
 
 @MainActor
 class CoinDetailViewModel: ObservableObject {
@@ -125,5 +126,14 @@ class CoinDetailViewModel: ObservableObject {
         } else {
             isValidDate = true
         }
+    }
+    
+    //MARK: - View Models
+    func createCoinViewModel(context: ModelContext) -> AddWalletViewModel {
+        AddWalletViewModel(
+            coin: coin,
+            coinService: CriptoService(APIClient.shared),
+            repository: WalletRepository(context: context)
+        )
     }
 }

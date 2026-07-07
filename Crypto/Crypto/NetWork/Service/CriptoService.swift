@@ -28,7 +28,7 @@ final class CriptoService: ObservableObject {
          try await apiClient.fetchImage(
                 endpoint: url,
                 headers: nil,
-                cachePolicy: .ignoreCache
+                cachePolicy: .useCache
             )
     }
     
@@ -40,7 +40,7 @@ final class CriptoService: ObservableObject {
             parameters: nil,
             encoding: URLEncoding.default,
             headers: nil,
-            cachePolicy: .ignoreCache
+            cachePolicy: .useCache
         )
     }
 }

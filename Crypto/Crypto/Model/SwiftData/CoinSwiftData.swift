@@ -11,19 +11,17 @@ import SwiftData
 @Model
 class CoinSwiftData {
     
+    @Attribute(.unique)
     var coinID : String
     var name: String
-    var symbol: String
     var quantity: Double
     
     init(
         coinID: String = "",
         name: String = "",
-        symbol: String = "",
         quantity: Double = 0.0
     ) {
         self.coinID = coinID
-        self.symbol = symbol
         self.name = name
         self.quantity = quantity
     }

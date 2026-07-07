@@ -54,18 +54,20 @@
 				NetWork/Core/APIClientProtocol.swift,
 				NetWork/Service/CoinDetailsService.swift,
 				NetWork/Service/CriptoService.swift,
+				Utils/AlertItem.swift,
 				ViewModel/AddWalletViewModel.swift,
 				ViewModel/CoinDetailViewModel.swift,
 				ViewModel/CriptoViewModel.swift,
 				ViewModel/HomeViewModel.swift,
 				ViewModel/WalletViewModel.swift,
+				Views/AddWalletView.swift,
 				Views/CoinDetailView.swift,
 				Views/HomeView.swift,
 				Views/Images/CoinImageView.swift,
 				Views/TableViews/CoinCellView.swift,
 				Views/TableViews/DetailCoinCellView.swift,
+				Views/UIElementes/CustomPopOver.swift,
 				Views/UIElementes/CustomTextField.swift,
-				Views/WalletAddView.swift,
 				Views/WalletListView.swift,
 			);
 			target = F10864182F3245A20019E1CC /* CryptoTests */;
@@ -84,18 +86,20 @@
 				NetWork/Core/APIClientProtocol.swift,
 				NetWork/Service/CoinDetailsService.swift,
 				NetWork/Service/CriptoService.swift,
+				Utils/AlertItem.swift,
 				ViewModel/AddWalletViewModel.swift,
 				ViewModel/CoinDetailViewModel.swift,
 				ViewModel/CriptoViewModel.swift,
 				ViewModel/HomeViewModel.swift,
 				ViewModel/WalletViewModel.swift,
+				Views/AddWalletView.swift,
 				Views/CoinDetailView.swift,
 				Views/HomeView.swift,
 				Views/Images/CoinImageView.swift,
 				Views/TableViews/CoinCellView.swift,
 				Views/TableViews/DetailCoinCellView.swift,
+				Views/UIElementes/CustomPopOver.swift,
 				Views/UIElementes/CustomTextField.swift,
-				Views/WalletAddView.swift,
 				Views/WalletListView.swift,
 			);
 			target = F10864222F3245A20019E1CC /* CryptoUITests */;
@@ -373,6 +377,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -437,6 +442,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

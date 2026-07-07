@@ -24,7 +24,6 @@ nonisolated enum NetworkError: Error {
     case unknown
 }
 
-@MainActor
 final class APIClient: APIClientProtocol {
     
     // MARK: - Singleton

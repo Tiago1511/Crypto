@@ -6,21 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct WalletAddView: View {
+struct AddWalletView: View {
     
     @ObservedObject var viewModel: AddWalletViewModel
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         
-        VStack(spacing: 20){
+        VStack(alignment:.leading, spacing: 20){
             
             headerView
         
             bodyView
             
             Button("Add Wallet") {
-                viewModel.addWallet()
+                viewModel.addWallet(modelContext: modelContext)
             }
             .frame(maxWidth: .infinity)
             .padding(20)
@@ -44,7 +46,7 @@ struct WalletAddView: View {
     private var headerView: some View {
         VStack () {
             HStack() {
-                CoinImageView(image: viewModel.coinImage, isLoading: false)
+                CoinImageView(image: viewModel.coinImage, isLoading: viewModel.isLoading)
                 
                 VStack(alignment: .leading) {
                     Text(viewModel.coin.name)
@@ -57,6 +59,9 @@ struct WalletAddView: View {
             }
             Text(viewModel.coin.currentPrice.toAmountString)
         }
+        .task {
+                await viewModel.loadIcon()
+        }
     }
     
     private var bodyView: some View {
@@ -67,7 +72,7 @@ struct WalletAddView: View {
                 text: $viewModel.quantityString,
                 isSecure: false,
                 keyboardType: .numberPad,
-                errorMessage: "Invalid Quantity",
+                errorMessage: NSLocalizedString("InvalidQuantity", comment: "Label displayed after the text field to identify the amount of cryptocurrency that is incorrect."),
                 isValid: viewModel.isValidQuantity
             )
             
@@ -83,10 +88,25 @@ struct WalletAddView: View {
 }
 
 #Preview {
-    WalletAddView(
+    
+    let config = ModelConfiguration(
+        isStoredInMemoryOnly: true
+    )
+    
+    let container = try! ModelContainer(
+        for: CoinSwiftData.self,
+        configurations: config
+    )
+    
+    let repository = WalletRepository(
+        context: container.mainContext
+    )
+    
+    AddWalletView(
         viewModel: AddWalletViewModel(
             coin: CoinModelMock.coin,
-            coinImage: UIImage(named: "AppIcon")
+            coinService: CriptoService(APIClient.shared),
+            repository: repository
         )
     )
 }

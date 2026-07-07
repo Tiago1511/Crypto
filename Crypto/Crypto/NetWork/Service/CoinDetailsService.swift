@@ -25,7 +25,7 @@ class CoinDetailsService {
          try await apiClient.fetchImage(
                 endpoint: url,
                 headers: nil,
-                cachePolicy: .ignoreCache
+                cachePolicy: .useCache
             )
     }
     

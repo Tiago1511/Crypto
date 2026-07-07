@@ -7,11 +7,13 @@
 
 import SwiftUI
 import Charts
+import SwiftData
 
 struct CoinDetailView: View {
     
     @ObservedObject var viewModel: CoinDetailViewModel
     @State private var days: Double = 1
+    @Environment(\.modelContext) private var modelContext
     private let minDays: Double = 1
     private let maxDays: Double = 365
     
@@ -31,7 +33,15 @@ struct CoinDetailView: View {
         
         .navigationTitle(viewModel.coin.name)
         .navigationBarTitleDisplayMode(.inline)
-        
+        .toolbar{
+            ToolbarItem(placement: .topBarTrailing, content: {
+                NavigationLink{
+                    AddWalletView(viewModel: viewModel.createCoinViewModel(context: modelContext))
+                } label : {
+                    Label("Add", systemImage: "plus")
+                }
+            })
+        }
     }
     
     private var headerSection: some View {
