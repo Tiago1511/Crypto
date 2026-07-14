@@ -95,7 +95,7 @@ struct AddWalletView: View {
                 title: Text(item.title),
                 message: Text(item.message),
                 primaryButton: .default(Text(NSLocalizedString("goToWallet", comment: ""))) {
-                    router.switchTab(to: .wallet, resetPath: true, resetActualTab: true)
+                    //router.switchTab(to: .wallet, resetPath: true, resetActualTab: true)
                 },
                 secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "")))
             )
