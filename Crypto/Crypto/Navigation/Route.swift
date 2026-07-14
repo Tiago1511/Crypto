@@ -9,10 +9,9 @@ import Foundation
 import SwiftUI
 
 enum Route: Hashable {
-    
     case home
     case wallet
-    case coinDetail(CoinDetailViewModel)
+    case coinDetail(CoinModel)
 }
 
 enum AppTab: Hashable, CaseIterable {

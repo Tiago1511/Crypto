@@ -140,4 +140,5 @@ struct CoinDetailView: View {
             coin: CoinModelMock.coin,
             coinService: CoinDetailsService(APIClient.shared)
         ))
+    .environment(AppRouter())
 }

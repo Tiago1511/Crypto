@@ -26,9 +26,12 @@ final class AppFactory {
         )
     }
     
-    func makeCoinDetailView(coin: CoinDetailViewModel) -> CoinDetailView {
+    func makeCoinDetailView(coin: CoinModel) -> CoinDetailView {
         CoinDetailView(
-            viewModel: coin
+            viewModel: CoinDetailViewModel(
+                coin: coin,
+                coinService: CoinDetailsService(self.apiClient)
+            )
         )
     }
     

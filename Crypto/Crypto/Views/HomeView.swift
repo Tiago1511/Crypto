@@ -16,7 +16,7 @@ struct HomeView: View {
     var body: some View {
         List(viewModel.filteredCoins, id: \.id) { coin in
             Button {
-                router.push(.coinDetail(viewModel.createCoinDetailViewModel(coin)))
+                router.push(.coinDetail(coin))
             } label: {
                 CoinCellView(
                     viewModel: viewModel.createCoinViewModel(coin)
@@ -35,11 +35,11 @@ struct HomeView: View {
         .task {
             await viewModel.fetchCoins()
         }
-        .environment(router)
         
     }
 }
 
 #Preview {
     HomeView(viewModel: HomeViewModel( CriptoService(APIClient.shared)))
+        .environment(AppRouter())
 }

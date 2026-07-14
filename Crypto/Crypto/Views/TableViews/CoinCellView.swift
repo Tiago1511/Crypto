@@ -18,6 +18,7 @@ struct CoinCellView: View {
             Text("#\(String(describing: viewModel.coin.marketCapRank ?? 00))")
                 .font(.title3)
                 .fontWeight(.semibold)
+                .foregroundStyle(.black)
             
             CoinImageView(image: viewModel.icon, isLoading: viewModel.isLoading, size: 50)
             
@@ -25,9 +26,11 @@ struct CoinCellView: View {
                 Text(viewModel.coin.name)
                     .font(.title)
                     .fontWeight(.regular)
+                    .foregroundStyle(.black)
                 Text(viewModel.coin.symbol.uppercased())
                     .font(.title3)
                     .fontWeight(.regular)
+                    .foregroundStyle(.black)
             }
             
             
@@ -37,6 +40,7 @@ struct CoinCellView: View {
                 Text("\(viewModel.coin.currentPrice.toAmountString)")
                     .font(.title3)
                     .fontWeight(.regular)
+                    .foregroundStyle(.black)
                 
                 Text("\(viewModel.coin.priceChangePercentage24H?.toPercentageString ?? "0.0%")")
                     .font(.title3)
