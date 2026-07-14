@@ -10,32 +10,33 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel
+    @Environment(AppRouter.self) var router
+    private let factory: AppFactory = AppFactory()
     
     var body: some View {
-        NavigationStack {
-            List(viewModel.filteredCoins, id: \.id) { coin in
-                NavigationLink(value: coin) {
-                    CoinCellView(
-                        viewModel: viewModel.createCoinViewModel(coin)
-                    )
-                }
-            }
-            .searchable(text: $viewModel.searchText,
-                        placement: .navigationBarDrawer,
-                        prompt: "SearchCoins")
-            .navigationTitle("Coins")
-            .navigationDestination(for: CoinModel.self) { coin in
-                CoinDetailView(
-                    viewModel: viewModel.createCoinDetailViewModel(coin)
+        List(viewModel.filteredCoins, id: \.id) { coin in
+            Button {
+                router.push(.coinDetail(viewModel.createCoinDetailViewModel(coin)))
+            } label: {
+                CoinCellView(
+                    viewModel: viewModel.createCoinViewModel(coin)
                 )
-            }.background(
-                Color.backgroundCl
-                .ignoresSafeArea(.all)
-                )
-            .task {
-                await viewModel.fetchCoins()
             }
         }
+        .searchable(text: $viewModel.searchText,
+                    placement: .navigationBarDrawer,
+                    prompt: "SearchCoins")
+        .navigationTitle("Coins")
+        
+        .background(
+            Color.backgroundCl
+                .ignoresSafeArea(.all)
+        )
+        .task {
+            await viewModel.fetchCoins()
+        }
+        .environment(router)
+        
     }
 }
 

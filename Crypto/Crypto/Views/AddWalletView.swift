@@ -12,6 +12,7 @@ struct AddWalletView: View {
     
     @ObservedObject var viewModel: AddWalletViewModel
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppRouter.self) private var router
     
     var body: some View {
         
@@ -95,7 +96,7 @@ struct AddWalletView: View {
                 title: Text(item.title),
                 message: Text(item.message),
                 primaryButton: .default(Text(NSLocalizedString("goToWallet", comment: ""))) {
-                    //router.switchTab(to: .wallet, resetPath: true, resetActualTab: true)
+                    router.switchTab(to: .wallet, resetPath: true, resetActualTab: true)
                 },
                 secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "")))
             )
@@ -139,4 +140,6 @@ struct AddWalletView: View {
             repository: repository
         )
     )
+    .modelContainer(container)
+    .environment(AppRouter())
 }

@@ -14,6 +14,7 @@ struct CoinDetailView: View {
     @ObservedObject var viewModel: CoinDetailViewModel
     @State private var days: Double = 1
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppRouter.self) private var router
     private let minDays: Double = 1
     private let maxDays: Double = 365
     
