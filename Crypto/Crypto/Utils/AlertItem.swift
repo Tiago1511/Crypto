@@ -11,8 +11,13 @@ struct AlertItem: Identifiable {
     let id: UUID = UUID()
     let title: String
     let message: String
-    let primaryButton: Alert.Button?
-    let dismissButton: Alert.Button
+    let kind: Kind
+}
+
+enum Kind {
+    case coinAlreadyExists
+    case invalidData
+    case dataBaseError
 }
 
 struct AlertContent{
@@ -20,13 +25,19 @@ struct AlertContent{
     static let coinAlreadyExist = AlertItem(
         title: NSLocalizedString("Coin Already Exist", comment: "You have this coin"),
         message: NSLocalizedString("CurrencyExistsMessage", comment: ""),
-        primaryButton: .default(Text("goToWallet")),
-        dismissButton: .cancel(Text("OK")))
+        kind: .coinAlreadyExists
+        )
     
     static let coinInvalidData = AlertItem(
-        title: NSLocalizedString("Coin Already Exist", comment: "You have this coin"),
-        message: NSLocalizedString("goToWallet", comment: ""),
-        primaryButton: nil,
-        dismissButton: .cancel(Text("OK")))
+        title: NSLocalizedString("InvalidQuantity", comment: "Label displayed after the text field to identify the amount of cryptocurrency that is incorrect."),
+        message: NSLocalizedString("invalidQuantityMessage", comment: ""),
+        kind: .invalidData
+        )
+    
+    static let dataBaseError = AlertItem(
+        title: NSLocalizedString("error", comment: ""),
+        message: NSLocalizedString("somethingWentWrongPleaseTryAgain", comment: ""),
+        kind: .dataBaseError
+    )
     
 }

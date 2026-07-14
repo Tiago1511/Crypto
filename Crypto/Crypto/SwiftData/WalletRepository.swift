@@ -83,7 +83,14 @@ final class WalletRepository: WalletRepositoryProtocol {
             
             try context.save()
         } catch {
-            throw RepositoryError.databaseFailure(underlyingError: error)
+            
+            switch error as? RepositoryError {
+            case .dataAlreadyExists:
+                throw RepositoryError.dataAlreadyExists
+            default:
+                throw RepositoryError.databaseFailure(underlyingError: error)
+            }
+            
         }
         
     }
@@ -100,7 +107,7 @@ final class WalletRepository: WalletRepositoryProtocol {
         quantity: Double
     ) throws {
         
-        var coin = try fetchCoin(coinID: coinID)
+        let coin = try fetchCoin(coinID: coinID)
 
         coin.quantity = quantity
         

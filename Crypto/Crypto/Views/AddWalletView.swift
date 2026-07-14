@@ -40,6 +40,9 @@ struct AddWalletView: View {
                 .ignoresSafeArea(.all)
         )
         .dismissKeyboardOnTap()
+        .alert(item: $viewModel.alertItem) { error in
+            alert(for: error)
+        }
         
     }
     
@@ -82,6 +85,33 @@ struct AddWalletView: View {
                 Text(viewModel.valueEstimated.toAmountString)
                 
             }
+        }
+    }
+    
+    private func alert(for item: AlertItem) -> Alert {
+        switch item.kind {
+        case .coinAlreadyExists:
+            return Alert(
+                title: Text(item.title),
+                message: Text(item.message),
+                primaryButton: .default(Text(NSLocalizedString("goToWallet", comment: ""))) {
+                    router.switchTab(to: .wallet, resetPath: true, resetActualTab: true)
+                },
+                secondaryButton: .cancel(Text(NSLocalizedString("Cancel", comment: "")))
+            )
+        case .invalidData:
+            return Alert(
+                title: Text(item.title),
+                message: Text(item.message),
+                dismissButton: .default(Text("OK"))
+            )
+            
+        default:
+            return Alert(
+                title: Text(item.title),
+                message: Text(item.message),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     

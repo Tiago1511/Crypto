@@ -29,6 +29,12 @@ struct CustomTextField: View {
     var isValid: Bool
     var maxLength: Int?
     
+    @FocusState private var isFocused: Bool
+    
+    private var showError: Bool {
+        !isValid && !isFocused
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             
@@ -36,10 +42,12 @@ struct CustomTextField: View {
                 if isSecure {
                     SecureField(title, text: $text)
                         .padding(5)
+                        .focused($isFocused)
                     
                 } else {
                     TextField(title, text: $text)
                         .padding(5)
+                        .focused($isFocused)
                 }
             }
             .keyboardType(keyboardType)
@@ -55,7 +63,7 @@ struct CustomTextField: View {
                 }
             }
             
-            if !isValid, let errorMessage = errorMessage {
+            if showError, let errorMessage = errorMessage {
                 Text(errorMessage)
                     .font(.caption2)
                     .foregroundColor(.red)
@@ -70,7 +78,7 @@ struct CustomTextField: View {
     }
     
     private var borderColor: Color {
-        if !isValid, errorMessage != nil {
+        if showError && errorMessage != nil {
             return .red
         }
         return Color.accent

@@ -46,7 +46,16 @@ class AddWalletViewModel: ObservableObject {
     
     //MARK: - Validate
     func validateQuantity() -> Bool {
-        Double(quantityString.replacingOccurrences(of: ",", with: ".")) != nil
+        guard let quantity = Double(quantityString.replacingOccurrences(of: ",", with: ".")) else {
+            return false
+        }
+        
+        if quantity <= 0.0 {
+            return false
+        }
+        
+        return true
+        
     }
     
     //MARK: - Add Wallet
@@ -55,19 +64,21 @@ class AddWalletViewModel: ObservableObject {
             do {
                 try repository.save(coinID: coin.id, name:coin.name, quantity: quantity)
             } catch {
+            
                 switch error as? RepositoryError {
                     
                 case .dataAlreadyExists:
                     alertItem = AlertContent.coinAlreadyExist
-                    
 
                 case .invalidData:
-                    
+                    alertItem = AlertContent.coinInvalidData
                     
                 default:
-                    print("erro: \(error.localizedDescription)")
+                    alertItem = AlertContent.dataBaseError
                 }
             }
+        } else {
+            alertItem = AlertContent.coinInvalidData
         }
         
     }
