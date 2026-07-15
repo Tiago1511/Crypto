@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct AddWalletView: View {
     
     @ObservedObject var viewModel: AddWalletViewModel
-    @Environment(\.modelContext) private var modelContext
     @Environment(AppRouter.self) private var router
     
     var body: some View {
@@ -23,7 +21,7 @@ struct AddWalletView: View {
             bodyView
             
             Button("Add Wallet") {
-                viewModel.addWallet(modelContext: modelContext)
+                viewModel.addWallet()
             }
             .frame(maxWidth: .infinity)
             .padding(20)
@@ -119,27 +117,12 @@ struct AddWalletView: View {
 }
 
 #Preview {
-    
-    let config = ModelConfiguration(
-        isStoredInMemoryOnly: true
-    )
-    
-    let container = try! ModelContainer(
-        for: CoinSwiftData.self,
-        configurations: config
-    )
-    
-    let repository = WalletRepository(
-        context: container.mainContext
-    )
-    
     AddWalletView(
         viewModel: AddWalletViewModel(
             coin: CoinModelMock.coin,
-            coinService: CriptoService(APIClient.shared),
-            repository: repository
+            coinService: MockCriptoService(),
+            repository: MockWalletRepository()
         )
     )
-    .modelContainer(container)
     .environment(AppRouter())
 }

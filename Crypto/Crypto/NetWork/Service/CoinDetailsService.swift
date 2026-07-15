@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Alamofire
 
-class CoinDetailsService {
+final class CoinDetailsService: CoinDetailsServiceProtocol {
     private let apiClient: APIClientProtocol
     
     

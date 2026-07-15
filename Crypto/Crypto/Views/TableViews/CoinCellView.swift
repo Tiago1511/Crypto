@@ -60,6 +60,6 @@ struct CoinCellView: View {
     CoinCellView(
         viewModel: CoinViewModel(
             coin: CoinModelMock.coin,
-            coinService: CriptoService(APIClient.shared)
+            coinService: MockCriptoService()
         ))
 }

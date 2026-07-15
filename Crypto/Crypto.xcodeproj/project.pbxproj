@@ -44,6 +44,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				DI/DependencyContainer.swift,
+				"DI/EnvironmentValues+AppFactory.swift",
 				Extension/AmountExtension.swift,
 				Extension/TextFied.swift,
 				Extension/ViewExtension.swift,
@@ -55,8 +57,6 @@
 				Navigation/Route.swift,
 				Navigation/RouteView.swift,
 				NetWork/Core/APIClientProtocol.swift,
-				NetWork/Service/CoinDetailsService.swift,
-				NetWork/Service/CriptoService.swift,
 				Utils/AlertItem.swift,
 				Utils/AppFactory.swift,
 				ViewModel/AddWalletViewModel.swift,
@@ -80,6 +80,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				DI/DependencyContainer.swift,
+				"DI/EnvironmentValues+AppFactory.swift",
 				Extension/AmountExtension.swift,
 				Extension/TextFied.swift,
 				Extension/ViewExtension.swift,
@@ -91,8 +93,6 @@
 				Navigation/Route.swift,
 				Navigation/RouteView.swift,
 				NetWork/Core/APIClientProtocol.swift,
-				NetWork/Service/CoinDetailsService.swift,
-				NetWork/Service/CriptoService.swift,
 				Utils/AlertItem.swift,
 				Utils/AppFactory.swift,
 				ViewModel/AddWalletViewModel.swift,

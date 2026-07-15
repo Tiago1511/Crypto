@@ -6,32 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabBar: View {
-    
+
     @State private var router = AppRouter()
-   
-    
+    @Environment(\.appFactory) private var factory
+    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
-        
+
         TabView(selection: $router.selectedTab) {
-            
+
             //Home
             NavigationStack(path: router.path(for: .home)) {
-                HomeView(viewModel: HomeViewModel( CriptoService(APIClient.shared)))
+                factory.makeHomeView()
                     .navigationDestination(for: Route.self) { route in
                         RouteView(route: route)
                     }
-                    
             }
             .tabItem {
                 Label("Market", systemImage: "house")
             }
             .tag(AppTab.home)
-            
+
             //Wallet
             NavigationStack(path: router.path(for: .wallet)) {
-                WalletListView(viewModel: WalletViewModel())
+                factory.makeWalletListView(context: modelContext)
                     .navigationDestination(for: Route.self) { route in
                         RouteView(route: route)
                     }
@@ -47,4 +48,5 @@ struct TabBar: View {
 
 #Preview {
     TabBar()
+        .environment(\.appFactory, AppFactory(container: MockDependencyContainer()))
 }

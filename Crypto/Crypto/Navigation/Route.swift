@@ -12,6 +12,7 @@ enum Route: Hashable {
     case home
     case wallet
     case coinDetail(CoinModel)
+    case addWallet(CoinModel)
 }
 
 enum AppTab: Hashable, CaseIterable {

@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import SwiftUI
-import SwiftData
 
 @MainActor
 class AddWalletViewModel: ObservableObject {
@@ -19,7 +18,7 @@ class AddWalletViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     
     private let repository: WalletRepositoryProtocol
-    private let coinService: CriptoService
+    private let coinService: CriptoServiceProtocol
     
     @Published var quantityString: String = "" {
         didSet {
@@ -36,7 +35,7 @@ class AddWalletViewModel: ObservableObject {
     }
     
     //MARK: - Init
-    init(coin: CoinModel, coinService: CriptoService, quantity: Double = 0.0, repository: WalletRepositoryProtocol) {
+    init(coin: CoinModel, coinService: CriptoServiceProtocol, quantity: Double = 0.0, repository: WalletRepositoryProtocol) {
         self.coin = coin
         self.coinService = coinService
         self.quantityString = quantity == 0.0 ? "" : String(quantity)
@@ -59,7 +58,7 @@ class AddWalletViewModel: ObservableObject {
     }
     
     //MARK: - Add Wallet
-    func addWallet(modelContext: ModelContext) {
+    func addWallet() {
         if validateQuantity() {
             do {
                 try repository.save(coinID: coin.id, name:coin.name, quantity: quantity)

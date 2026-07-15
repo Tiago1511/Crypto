@@ -8,15 +8,16 @@
 import Foundation
 import Combine
 
+@MainActor
 class HomeViewModel: ObservableObject {
     
     @Published var coins: [CoinModel] = [CoinModelMock.coin]
     @Published var searchText = ""
     
-    private let coinService: CriptoService
+    private let coinService: CriptoServiceProtocol
     
     //MARK: - Init
-    init(_ service: CriptoService) {
+    init(_ service: CriptoServiceProtocol) {
         self.coinService = service
     }
     
@@ -34,7 +35,7 @@ class HomeViewModel: ObservableObject {
     
     //MARK: - View Models
     func createCoinViewModel(_ coin: CoinModel) -> CoinViewModel {
-        CoinViewModel(coin: coin, coinService: CriptoService(APIClient.shared))
+        CoinViewModel(coin: coin, coinService: coinService)
     }
     
     //MARK: - Services

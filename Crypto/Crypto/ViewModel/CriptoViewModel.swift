@@ -16,9 +16,9 @@ class CoinViewModel: ObservableObject {
     @Published var icon: UIImage? = nil
     @Published var isLoading: Bool = false
     
-    private let coinService: CriptoService
+    private let coinService: CriptoServiceProtocol
     
-    init(coin: CoinModel, coinService: CriptoService) {
+    init(coin: CoinModel, coinService: CriptoServiceProtocol) {
         self.coin = coin
         self.coinService = coinService
     }

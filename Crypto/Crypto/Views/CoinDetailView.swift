@@ -7,13 +7,11 @@
 
 import SwiftUI
 import Charts
-import SwiftData
 
 struct CoinDetailView: View {
     
     @ObservedObject var viewModel: CoinDetailViewModel
     @State private var days: Double = 1
-    @Environment(\.modelContext) private var modelContext
     @Environment(AppRouter.self) private var router
     private let minDays: Double = 1
     private let maxDays: Double = 365
@@ -36,9 +34,9 @@ struct CoinDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             ToolbarItem(placement: .topBarTrailing, content: {
-                NavigationLink{
-                    AddWalletView(viewModel: viewModel.createCoinViewModel(context: modelContext))
-                } label : {
+                Button {
+                    router.push(.addWallet(viewModel.coin))
+                } label: {
                     Label("Add", systemImage: "plus")
                 }
             })
@@ -138,7 +136,7 @@ struct CoinDetailView: View {
     CoinDetailView(
         viewModel: CoinDetailViewModel(
             coin: CoinModelMock.coin,
-            coinService: CoinDetailsService(APIClient.shared)
+            coinService: MockCoinDetailsService()
         ))
     .environment(AppRouter())
 }

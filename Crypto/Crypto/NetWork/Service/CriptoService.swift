@@ -11,7 +11,7 @@ import Combine
 import Alamofire
 
 @MainActor
-final class CriptoService: ObservableObject {
+final class CriptoService: ObservableObject, CriptoServiceProtocol {
     
     private let apiClient: APIClientProtocol
     

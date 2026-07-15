@@ -11,7 +11,6 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel
     @Environment(AppRouter.self) var router
-    private let factory: AppFactory = AppFactory()
     
     var body: some View {
         List(viewModel.filteredCoins, id: \.id) { coin in
@@ -40,6 +39,6 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: HomeViewModel( CriptoService(APIClient.shared)))
+    HomeView(viewModel: HomeViewModel(MockCriptoService()))
         .environment(AppRouter())
 }
